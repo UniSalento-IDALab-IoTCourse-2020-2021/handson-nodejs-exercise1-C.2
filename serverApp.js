@@ -3,7 +3,6 @@ const app = express();
 const MongoClient = require('mongodb').MongoClient;
 const uri = 'mongodb://localhost/';
 
-const client = new MongoClient(uri, {useUnifiedTopology: true});
 
 app.listen(3000, () => {
     console.log("Server running on port 3000");
@@ -25,6 +24,7 @@ app.post("/temperature", (req, res, next) => {
 
         try {
 
+			const client = new MongoClient(uri, {useUnifiedTopology: true});
             await client.connect();
 
             const database = client.db("TemperatureDB");
@@ -51,6 +51,8 @@ app.post("/temperature", (req, res, next) => {
 app.get('/dashboard', async (req, res) => {
     async function run() {
         try {
+			
+			const client = new MongoClient(uri, {useUnifiedTopology: true});
             await client.connect();
             const database = client.db("TemperatureDB");
             const tem = database.collection("temperature");
