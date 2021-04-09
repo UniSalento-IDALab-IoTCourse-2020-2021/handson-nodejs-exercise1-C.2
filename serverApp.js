@@ -22,9 +22,9 @@ app.post("/temperature", (req, res, next) => {
 
     async function run() {
 
+		const client = new MongoClient(uri, {useUnifiedTopology: true});
         try {
 
-			const client = new MongoClient(uri, {useUnifiedTopology: true});
             await client.connect();
 
             const database = client.db("TemperatureDB");
@@ -50,9 +50,9 @@ app.post("/temperature", (req, res, next) => {
 
 app.get('/dashboard', async (req, res) => {
     async function run() {
+		const client = new MongoClient(uri, {useUnifiedTopology: true});
         try {
 			
-			const client = new MongoClient(uri, {useUnifiedTopology: true});
             await client.connect();
             const database = client.db("TemperatureDB");
             const tem = database.collection("temperature");
